@@ -1,14 +1,26 @@
-# 使用官方的OpenJDK 17运行时镜像
 FROM eclipse-temurin:17-jdk-alpine
 
-# 设置工作目录
+RUN apk add --no-cache maven
+
 WORKDIR /app
 
-# 复制Maven构建的jar文件
-COPY target/lab01-1.0-SNAPSHOT.jar app.jar
+COPY . .
 
-# 暴露端口
+# 调试：显示当前目录结构
+RUN echo "=== Current directory structure ==="
+RUN ls -la
+
+# 调试：显示 target 目录（如果存在）
+RUN echo "=== Target directory ==="
+RUN ls -la target/ || echo "Target directory does not exist yet"
+
+# 构建应用
+RUN mvn clean package -DskipTests
+
+# 调试：显示构建后的文件
+RUN echo "=== After Maven build ==="
+RUN ls -la target/
+
 EXPOSE 8080
 
-# 运行应用
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "target/lab01-1.0-SNAPSHOT.jar"]
