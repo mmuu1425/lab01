@@ -1,0 +1,4 @@
+build:
+  docker:
+    web: dockerfile
+# 不需要 run 部分，因为 ENTRYPOINT 已经在 Dockerfile 中定义
