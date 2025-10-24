@@ -1,0 +1,40 @@
+services:
+  # PostgreSQL数据库服务
+  postgres:
+    image: postgres:15  # 使用更新的版本
+    container_name: lab01-postgres
+    environment:
+      POSTGRES_DB: persons
+      POSTGRES_USER: program
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - lab01-network
+
+  # Spring Boot应用服务
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lab01-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/persons
+      SPRING_DATASOURCE_USERNAME: program
+      SPRING_DATASOURCE_PASSWORD: test
+      SPRING_JPA_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - lab01-network
+
+volumes:
+  postgres_data:
+
+networks:
+  lab01-network:
+    driver: bridge

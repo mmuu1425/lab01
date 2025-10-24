@@ -1,0 +1,1 @@
+web: java -jar target/lab01-1.0-SNAPSHOT.jar
