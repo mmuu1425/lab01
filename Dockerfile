@@ -1,10 +1,13 @@
-FROM maven:3.8.6-jdk-17 AS builder
+FROM eclipse-temurin:17-jdk-alpine
+
+RUN apk add --no-cache maven
+
 WORKDIR /app
+
 COPY . .
+
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
-WORKDIR /app
-COPY --from=builder /app/target/lab01-1.0-SNAPSHOT.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+CMD ["java", "-jar", "target/lab01-1.0-SNAPSHOT.jar", "--server.port=8080", "--server.address=0.0.0.0"]
