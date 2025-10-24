@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn clean spring-boot:repackage -DskipTests
+RUN mvn clean package -DskipTests
 
 EXPOSE 8080
 
