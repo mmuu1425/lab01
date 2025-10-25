@@ -1,0 +1,87 @@
+{
+  "info": {
+    "name": "Lab1 Person API Tests",
+    "description": "实验室1 - Person API集成测试集合",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET All Persons",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/persons",
+          "host": ["{{baseUrl}}"],
+          "path": ["persons"]
+        }
+      }
+    },
+    {
+      "name": "CREATE Person",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"测试用户\",\n  \"age\": 25\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/persons",
+          "host": ["{{baseUrl}}"],
+          "path": ["persons"]
+        }
+      }
+    },
+    {
+      "name": "GET Person by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/persons/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["persons", "1"]
+        }
+      }
+    },
+    {
+      "name": "UPDATE Person",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"更新后的用户\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/persons/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["persons", "1"]
+        }
+      }
+    },
+    {
+      "name": "DELETE Person",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/persons/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["persons", "1"]
+        }
+      }
+    }
+  ]
+}
